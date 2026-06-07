@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programa Embaixadores — Gabriel Tecnologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gg:#0AFC33;--gr:#1A1A1A;--gd:#0D3B1F;
+  --gm:rgba(10.252,51,0.10);--gb:rgba(10.252,51,0.22);
+  --wa:#25D366;
+  --bg:#111;--bg2:#1A1A1A;--bg3:#222;--bg4:#2a2a2a;
+  --border:rgba(255.255,255,0.08);--border2:rgba(255.255,255,0.14);
+  --text:#f0f0f0;--text2:#aaa;--text3:#666;
+  --radius:10px;--radius-lg:14px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,sans-serif;min-height:100vh;padding-bottom:2rem}
+
+/* TOP NAV */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1rem}
+.topnav-inner{max-width:480px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px}
+.topnav-logo{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:11px;font-weight:700;color:var(--gg);letter-spacing:.12em;text-transform:uppercase}
+.topnav-pts{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--gg)}
+
+/* LAYOUT */
+.page{max-width:480px;margin:0 auto;padding:0 1rem}
+
+/* HEADER */
+.hdr{background:#0AFC33;border-radius:var(--radius-lg);padding:1.4rem 1.5rem;margin:1rem 0;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:var(--gm);border:1px solid var(--gb)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem}
+.hdr-badge{background:var(--gm);border:.5px solid var(--gb);color:var(--gg);font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px}
+.htitle{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:26px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:3px}
+.htitle span{color:var(--gg)}
+.hsub{font-size:12px;color:rgba(255.255,255,.4);font-weight:300;margin-bottom:.9rem}
+.pts-bar{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid rgba(13,59,31,0.25)}
+.pts-lbl{font-size:11px;color:rgba(255.255,255,.45);flex-shrink:0}
+.pts-track{flex:1;height:5px;background:rgba(13,59,31,0.2);border-radius:3px}
+.pts-fill{height:5px;border-radius:3px;background:#0D3B1F;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.pts-num{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:13px;font-weight:700;color:#0D3B1F;flex-shrink:0}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:1.2rem;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:60px;padding:8px 4px;font-size:10px;font-weight:500;color:var(--text2);background:transparent;border:none;border-radius:7px;cursor:pointer;font-family:'DM Sans',system-ui,-apple-system,sans-serif;transition:all .18s;text-align:center;white-space:nowrap}
+.tab.active{background:var(--gr);color:var(--gg)}
+.sec{display:none}.sec.active{display:block}
+.slbl{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;padding-left:2px}
+
+/* CARDS BASE */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.card+.card{margin-top:8px}
+
+/* RANKING */
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;padding:1rem 0 1.5rem}
+.pi{text-align:center;flex:1}
+.pav{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne','DM Sans',system-ui,sans-serif;font-weight:700;font-size:14px;margin:0 auto 6px;border:2px solid var(--border2);background:var(--bg3);color:var(--text2)}
+.p1 .pav{background:var(--gm);border-color:var(--gg);color:var(--gg);width:58px;height:58px;font-size:17px}
+.pcrown{font-size:16px;display:block;margin-bottom:3px}
+.pname{font-size:11px;font-weight:500;color:var(--text)}
+.ppts{font-family:'Syne','DM Sans',system-ui,sans-serif;font-weight:700;color:var(--gg);font-size:14px}
+.plbl{font-size:10px;color:var(--text3)}
+.pblock{height:36px;border-radius:4px 4px 0 0;margin:4px 8px 0;background:var(--bg3);border:1px solid var(--border)}
+.p1 .pblock{height:52px;background:var(--gm);border-color:var(--gb)}
+.p3 .pblock{height:24px}
+.rlist{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem}
+.rrow{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);transition:border-color .15s}
+.rrow:hover{border-color:var(--border2)}
+.rnum{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:12px;font-weight:700;color:var(--text3);width:16px;text-align:center}
+.rav{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--text2)}
+.rinfo{flex:1}
+.rname{font-size:13px;font-weight:500;color:var(--text)}
+.rcondo{font-size:11px;color:var(--text3)}
+.rbar-wrap{margin-top:4px;height:3px;background:var(--bg3);border-radius:2px}
+.rbar-fill{height:3px;border-radius:2px;background:var(--gg)}
+.rright{text-align:right}
+.rpts-val{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:15px;font-weight:700;color:var(--gg)}
+.rpts-lbl{font-size:10px;color:var(--text3)}
+.rnote{padding:11px 13px;background:var(--bg2);border-radius:var(--radius);display:flex;align-items:center;gap:9px;border:1px solid var(--border);font-size:12px;color:var(--text2)}
+
+/* MISSÕES */
+.mhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+.mtitle{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.mptot{font-size:11px;background:var(--gm);color:var(--gg);border:.5px solid var(--gb);padding:3px 10px;border-radius:20px;font-weight:500}
+.rules-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:11px 13px;margin-bottom:1rem}
+.rules-title{font-size:11px;font-weight:500;color:var(--text);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.rule-row{display:flex;align-items:flex-start;gap:7px;margin-bottom:5px;font-size:11px;color:var(--text2);line-height:1.4}
+.rule-row:last-child{margin-bottom:0}
+.rtag{font-size:9px;padding:1px 6px;border-radius:20px;font-weight:500;flex-shrink:0;margin-top:1px}
+.rt-o{background:rgba(245.158,11,.15);color:#d97706}
+.rt-b{background:rgba(59.130,246,.15);color:#60a5fa}
+.rt-r{background:rgba(239,68,68,.15);color:#f87171}
+.rt-g{background:var(--gm);color:var(--gg)}
+.mcat{margin-bottom:1.2rem}
+.mc{display:flex;align-items:center;gap:10px;padding:12px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.mc:hover{border-color:var(--gb);background:var(--bg3)}
+.mc:active{transform:scale(.98)}
+.mc.done{background:var(--gm);border-color:var(--gb)}
+.mico{width:36px;height:36px;border-radius:var(--radius);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:all .18s}
+.mc.done .mico{background:rgba(10.252,51,.07);border-color:var(--gb)}
+.mbody{flex:1}
+.mname{font-size:13px;font-weight:500;color:var(--text);line-height:1.3}
+.mdesc{font-size:11px;color:var(--text2);margin-top:2px}
+.mreg{display:inline-flex;align-items:center;gap:3px;margin-top:4px;font-size:9px;padding:1px 7px;border-radius:20px;background:rgba(37.211,102,.1);color:#4ade80;font-weight:500}
+.mright{text-align:right;flex-shrink:0}
+.mpts{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:14px;font-weight:700;color:var(--gg)}
+.mptsl{font-size:10px;color:var(--text3)}
+.mchk{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;margin-left:7px;flex-shrink:0;transition:all .18s}
+.mc.done .mchk{background:var(--gg);border-color:var(--gg);color:#000}
+.ai-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;padding:1px 6px;border-radius:20px;font-weight:600;margin-top:3px}
+.ai-alto{background:rgba(245.158,11,.15);color:#fbbf24}
+
+/* PRÊMIOS */
+.pcat-intro{background:var(--gr);border-radius:var(--radius);padding:13px 15px;margin-bottom:1rem}
+.pcat-intro-t{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.pcat-intro-s{font-size:11px;color:rgba(255.255,255,.4)}
+.saldo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.sc{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);padding:11px 13px}
+.sc-lbl{font-size:11px;color:var(--text2);margin-bottom:3px}
+.sc-val{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:18px;font-weight:800;color:var(--text)}
+.sc.hl .sc-val{color:var(--gg)}
+.flav-leg{display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap}
+.fl-it{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)}
+.fl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.exp-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:8px;overflow:hidden;transition:all .18s}
+.exp-card:hover{border-color:var(--border2)}
+.exp-card.resgated{background:var(--gm);border-color:var(--gb)}
+.exp-top{display:flex;align-items:flex-start;gap:12px;padding:13px 14px}
+.exp-emoji{font-size:24px;flex-shrink:0;margin-top:1px}
+.exp-body{flex:1}
+.exp-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.3}
+.exp-desc{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.4}
+.exp-tags{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
+.etag{font-size:9px;padding:1px 7px;border-radius:20px;font-weight:500}
+.ea{background:rgba(216,90,48,.2);color:#f97316}
+.es{background:rgba(59.130,246,.15);color:#60a5fa}
+.ed{background:rgba(16.185,129,.15);color:#34d399}
+.eg{background:rgba(139,92.246,.15);color:#a78bfa}
+.exp-note{font-size:9px;color:#a78bfa;margin-top:3px;font-weight:500}
+.exp-bottom{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--border)}
+.exp-cost{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:15px;font-weight:700;color:var(--gg)}
+.exp-cost-sub{font-size:10px;color:var(--text3)}
+.exp-btn{font-size:12px;font-weight:500;padding:7px 16px;border-radius:var(--radius);border:1px solid var(--gb);background:var(--gm);color:var(--gg);cursor:pointer;font-family:'DM Sans',system-ui,-apple-system,sans-serif;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.exp-btn:hover{background:rgba(10.252,51,.18)}
+.exp-btn:active{transform:scale(.97)}
+.exp-btn:disabled{background:var(--bg3);border-color:var(--border);color:var(--text3);cursor:not-allowed;transform:none}
+.exp-btn.done-btn{background:var(--gg);border-color:var(--gg);color:#000;cursor:default}
+
+/* REGISTRO */
+.reg-intro{background:var(--gr);border-radius:var(--radius);padding:13px 15px;margin-bottom:1rem}
+.reg-intro-t{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.reg-intro-s{font-size:11px;color:rgba(255.255,255,.4)}
+.ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.2rem}
+.ch-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.ch-head{padding:11px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.ch-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ch-name{font-size:12px;font-weight:500;color:var(--text)}
+.ch-sub{font-size:10px;color:var(--text3)}
+.ch-steps{padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.ch-step{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--text2)}
+.ch-num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* WHATSAPP MOCKUP */
+.phone-wrap{background:var(--bg2);border-radius:var(--radius-lg);padding:1rem;display:flex;justify-content:center;margin-bottom:1.2rem;border:1px solid var(--border)}
+.phone{width:240px;background:#111;border-radius:24px;padding:8px;overflow:hidden;border:1px solid #333}
+.phone-screen{background:#0b141a;border-radius:18px;display:flex;flex-direction:column}
+.phone-topbar{padding:9px 12px 6px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255.255,255,.06)}
+.phone-av{width:28px;height:28px;border-radius:50%;background:var(--gg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#000;flex-shrink:0}
+.phone-cn{font-size:11px;font-weight:500;color:#e9edef}
+.phone-cs{font-size:9px;color:#8696a0}
+.chat-area{padding:8px 8px 5px;display:flex;flex-direction:column;gap:5px}
+.msg{max-width:87%;padding:7px 10px;font-size:10px;line-height:1.4;border-radius:7px}
+.msg-in{background:#202c33;color:#e9edef;align-self:flex-start;border-radius:7px 7px 7px 0}
+.msg-out{background:#005c4b;color:#e9edef;align-self:flex-end;border-radius:7px 7px 0 7px}
+.msg-t{font-size:8px;color:#8696a0;margin-top:2px;text-align:right}
+.msg-sys{text-align:center;font-size:9px;color:#8696a0;padding:3px 8px;background:rgba(255.255,255,.04);border-radius:10px;margin:2px auto}
+.msg-bot{background:#1a2730;border:.5px solid rgba(37.211,102,.2);color:#e9edef;align-self:flex-start;border-radius:7px 7px 7px 0}
+.bot-hdr{display:flex;align-items:center;gap:4px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid rgba(255.255,255,.07)}
+.bot-dot{width:5px;height:5px;border-radius:50%;background:var(--gg)}
+.bot-lbl{font-size:8px;color:var(--gg);font-weight:500;letter-spacing:.04em}
+.pts-chip{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px}
+.pts-ok{background:rgba(10.252,51,.15);color:var(--gg)}
+.pts-pend{background:rgba(255.200,0,.12);color:#fbbf24}
+.chat-bar{padding:6px 9px;border-top:1px solid rgba(255.255,255,.06);display:flex;align-items:center;gap:5px}
+.chat-input-mock{flex:1;background:rgba(255.255,255,.07);border-radius:16px;padding:6px 10px;font-size:9px;color:rgba(255.255,255,.4)}
+.chat-send{width:26px;height:26px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* PAINEL */
+.admin-wrap{background:var(--bg2);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem;border:1px solid var(--border)}
+.admin-title{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:9px;display:flex;align-items:center;justify-content:space-between}
+.admin-badge{font-size:10px;background:rgba(245.158,11,.12);color:#fbbf24;padding:2px 8px;border-radius:20px}
+.qi{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin-bottom:6px;display:flex;align-items:flex-start;gap:9px;transition:opacity .3s}
+.qi-av{width:32px;height:32px;border-radius:50%;background:var(--gm);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--gg);flex-shrink:0}
+.qi-info{flex:1}
+.qi-name{font-size:12px;font-weight:500;color:var(--text)}
+.qi-mission{font-size:11px;color:var(--text2);margin-top:1px}
+.qi-meta{display:flex;align-items:center;gap:5px;margin-top:4px;flex-wrap:wrap}
+.qi-pts{font-size:10px;font-weight:500;padding:1px 7px;border-radius:20px;background:var(--gm);color:var(--gg);border:.5px solid var(--gb)}
+.qi-ch{font-size:10px;padding:1px 6px;border-radius:20px;font-weight:500}
+.qi-wa{background:rgba(37.211,102,.1);color:#4ade80}
+.qi-app{background:var(--gm);color:var(--gg)}
+.qi-time{font-size:10px;color:var(--text3)}
+.qi-btns{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.btn-ap{font-size:10px;padding:5px 11px;border-radius:var(--radius);background:var(--gg);border:none;color:#000;font-weight:500;cursor:pointer;font-family:'DM Sans',system-ui,-apple-system,sans-serif;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn-rj{font-size:10px;padding:5px 11px;border-radius:var(--radius);background:transparent;border:1px solid var(--border2);color:var(--text2);cursor:pointer;font-family:'DM Sans',system-ui,-apple-system,sans-serif;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.apvd{font-size:10px;padding:2px 9px;border-radius:20px;background:var(--gm);color:var(--gg);border:.5px solid var(--gb);font-weight:500}
+
+/* EVENTOS */
+.evlaunch{background:var(--gr);border-radius:var(--radius-lg);padding:1.2rem 1.4rem;margin-bottom:1.2rem;position:relative;overflow:hidden}
+.evlaunch::after{content:'29.06';position:absolute;right:-8px;bottom:-14px;font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:54px;font-weight:800;color:rgba(10.252,51,.06);line-height:1;pointer-events:none}
+.evdate{font-size:10px;color:var(--gg);font-weight:500;margin-bottom:3px;letter-spacing:.05em}
+.evtitle{font-family:'Syne','DM Sans',system-ui,sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:5px}
+.evdesc{font-size:12px;color:rgba(255.255,255,.45);line-height:1.5}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:1.2rem}
+.qc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:11px}
+.qdate{font-size:10px;color:var(--gg);font-weight:500;margin-bottom:3px}
+.qname{font-size:12px;font-weight:500;color:var(--text);margin-bottom:3px}
+.qtheme{font-size:11px;color:var(--text2);line-height:1.4}
+.qtag{display:inline-block;margin-top:7px;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--gm);color:var(--gg);border:.5px solid var(--gb);font-weight:500}
+.regnote{padding:11px 13px;background:var(--gm);border:.5px solid var(--gb);border-radius:var(--radius);font-size:12px;color:var(--text);line-height:1.5}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.sec.active>*{animation:fadeInUp .25s ease both}
+.sec.active>*:nth-child(2){animation-delay:.04s}
+.sec.active>*:nth-child(3){animation-delay:.08s}
+.sec.active>*:nth-child(4){animation-delay:.12s}
+.sec.active>*:nth-child(5){animation-delay:.16s}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <span class="topnav-logo">Gabriel · Embaixadores</span>
+    <span class="topnav-pts" id="nav-pts">300 pts</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-top">
+      <span class="topnav-logo">Gabriel Tecnologia</span>
+      <span class="hdr-badge">Jun 2026</span>
+    </div>
+    <div class="htitle">Programa <span>Embaixadores</span></div>
+    <div class="hsub">Engajamento · Reconhecimento · Comunidade síndico</div>
+    <div class="pts-bar">
+      <span class="pts-lbl">Seus pontos</span>
+      <div class="pts-track"><div class="pts-fill" id="hdr-bar" style="width:6%"></div></div>
+      <span class="pts-num" id="hdr-pts">300 pts</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('ranking',this)"><i class="ti ti-trophy" style="font-size:11px;margin-right:2px"></i>Ranking</button>
+    <button class="tab" onclick="showTab('missoes',this)"><i class="ti ti-target" style="font-size:11px;margin-right:2px"></i>Missões</button>
+    <button class="tab" onclick="showTab('premios',this)"><i class="ti ti-gift" style="font-size:11px;margin-right:2px"></i>Prêmios</button>
+    <button class="tab" onclick="showTab('registro',this)"><i class="ti ti-brand-whatsapp" style="font-size:11px;margin-right:2px"></i>Registro</button>
+    <button class="tab" onclick="showTab('eventos',this)"><i class="ti ti-calendar-event" style="font-size:11px;margin-right:2px"></i>Eventos</button>
+  </div>
+
+  <!-- RANKING -->
+  <div id="tab-ranking" class="sec active">
+        <div class="podium">
+      <div class="pi p2"><div class="pav">MA</div><div class="pname">Marcos Antonio Pereira Bastos</div><div class="ppts">2.640</div><div class="plbl">pts</div><div class="pblock"></div></div>
+      <div class="pi p1"><span class="pcrown">👑</span><div class="pav">LT</div><div class="pname">Luciana Teixeira</div><div class="ppts">3.850</div><div class="plbl">pts</div><div class="pblock"></div></div>
+      <div class="pi p3"><div class="pav">RR</div><div class="pname">Rosileia dos Reis</div><div class="ppts">2.140</div><div class="plbl">pts</div><div class="pblock"></div></div>
+    </div>
+    <div class="rlist">
+      <div class="rrow"><span class="rnum">4</span><div class="rav">EP</div><div class="rinfo"><div class="rname">Eduardo Perez Serrano Ximenes</div><div class="rbar-wrap"><div class="rbar-fill" style="width:47%"></div></div></div><div class="rright"><div class="rpts-val">1.820</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">5</span><div class="rav">JA</div><div class="rinfo"><div class="rname">Jorge Augusto</div><div class="rbar-wrap"><div class="rbar-fill" style="width:41%"></div></div></div><div class="rright"><div class="rpts-val">1.580</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">6</span><div class="rav">RB</div><div class="rinfo"><div class="rname">Roberta Renata Ribeiro</div><div class="rbar-wrap"><div class="rbar-fill" style="width:36%"></div></div></div><div class="rright"><div class="rpts-val">1.380</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">7</span><div class="rav">AP</div><div class="rinfo"><div class="rname">Ana Paula Granha</div><div class="rbar-wrap"><div class="rbar-fill" style="width:31%"></div></div></div><div class="rright"><div class="rpts-val">1.210</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">8</span><div class="rav">MT</div><div class="rinfo"><div class="rname">Marcelo Telles</div><div class="rbar-wrap"><div class="rbar-fill" style="width:25%"></div></div></div><div class="rright"><div class="rpts-val">980</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">9</span><div class="rav">SV</div><div class="rinfo"><div class="rname">Sheila de Oliveira Vieira</div><div class="rbar-wrap"><div class="rbar-fill" style="width:21%"></div></div></div><div class="rright"><div class="rpts-val">820</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">10</span><div class="rav">AC</div><div class="rinfo"><div class="rname">Anna Carolina F. Leite Chazan</div><div class="rbar-wrap"><div class="rbar-fill" style="width:19%"></div></div></div><div class="rright"><div class="rpts-val">750</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">11</span><div class="rav">FT</div><div class="rinfo"><div class="rname">Fábio Teixeira</div><div class="rbar-wrap"><div class="rbar-fill" style="width:16%"></div></div></div><div class="rright"><div class="rpts-val">620</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">12</span><div class="rav">AL</div><div class="rinfo"><div class="rname">Alvaro Luiz Z. de Brito</div><div class="rbar-wrap"><div class="rbar-fill" style="width:14%"></div></div></div><div class="rright"><div class="rpts-val">550</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">13</span><div class="rav">JW</div><div class="rinfo"><div class="rname">John Wayne</div><div class="rbar-wrap"><div class="rbar-fill" style="width:11%"></div></div></div><div class="rright"><div class="rpts-val">440</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">14</span><div class="rav">PB</div><div class="rinfo"><div class="rname">Pedro Bottino</div><div class="rbar-wrap"><div class="rbar-fill" style="width:10%"></div></div></div><div class="rright"><div class="rpts-val">380</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">15</span><div class="rav">SA</div><div class="rinfo"><div class="rname">Stanley Araujo</div><div class="rbar-wrap"><div class="rbar-fill" style="width:8%"></div></div></div><div class="rright"><div class="rpts-val">310</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">16</span><div class="rav">DB</div><div class="rinfo"><div class="rname">Darcy Brito</div><div class="rbar-wrap"><div class="rbar-fill" style="width:6%"></div></div></div><div class="rright"><div class="rpts-val">250</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">17</span><div class="rav">CM</div><div class="rinfo"><div class="rname">Claudio Morais</div><div class="rbar-wrap"><div class="rbar-fill" style="width:5%"></div></div></div><div class="rright"><div class="rpts-val">180</div><div class="rpts-lbl">pts</div></div></div>
+    </div><div class="rcondo">Cond. Barra Mar</div><div class="rbar-wrap"><div class="rbar-fill" style="width:48%"></div></div></div><div class="rright"><div class="rpts-val">1.580</div><div class="rpts-lbl">pts</div></div></div>
+      <div class="rrow"><span class="rnum">5</span><div class="rav">FS</div><div class="rinfo"><div class="rname">Fernanda S.</div><div class="rcondo">Cond. Ipanema Plus</div><div class="rbar-wrap"><div class="rbar-fill" style="width:29%"></div></div></div><div class="rright"><div class="rpts-val">1.100</div><div class="rpts-lbl">pts</div></div></div>
+    </div>
+    <div class="rnote"><i class="ti ti-info-circle" style="font-size:15px;flex-shrink:0"></i><span>Ranking em tempo real. Próxima premiação: <strong style="color:var(--text)">29 de junho</strong></span></div>
+  </div>
+
+  <!-- MISSÕES -->
+  <div id="tab-missoes" class="sec">
+    <div class="mhdr"><span class="mtitle">Suas missões</span><span class="mptot" id="pts-display">300 pts</span></div>
+    <div class="rules-box">
+      <div class="rules-title"><i class="ti ti-shield-check" style="font-size:13px;color:var(--gg)"></i> Regras de pontuação</div>
+      <div class="rule-row"><span class="rtag rt-o">30%</span>Missões de Presença contam até 30% do total resgatado</div>
+      <div class="rule-row"><span class="rtag rt-b">Bloqueio</span>Prêmios acima de 1.500 pts exigem 1 missão de Alto Impacto</div>
+      <div class="rule-row"><span class="rtag rt-r">3×/trim.</span>Cada missão pode ser concluída no máximo 3× por trimestre</div>
+      <div class="rule-row"><span class="rtag rt-g">12 meses</span>Pontos expiram após 12 meses sem uso</div>
+    </div>
+
+    <div class="mcat">
+      <div class="slbl">Presença e identidade</div>
+      <div class="mc done" onclick="toggleM(this,300)"><div class="mico">👕</div><div class="mbody"><div class="mname">Vestiu a camisa</div><div class="mdesc">Usou a blusa Gabriel em assembleia</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+300</div><div class="mptsl">pts</div></div><div class="mchk"><i class="ti ti-check" style="font-size:10px"></i></div></div>
+      <div class="mc" onclick="toggleM(this,200)"><div class="mico">📸</div><div class="mbody"><div class="mname">Postou nas redes</div><div class="mdesc">Story ou post @gabriel / #EmbaixadorGabriel</div><span class="mreg"><i class="ti ti-check" style="font-size:9px"></i> validação automática</span></div><div class="mright"><div class="mpts">+200</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,350)"><div class="mico">🎬</div><div class="mbody"><div class="mname">Reels com câmeras em operação</div><div class="mdesc">Gravou vídeo mostrando Gabriel no condomínio</div><span class="mreg"><i class="ti ti-check" style="font-size:9px"></i> validação automática</span></div><div class="mright"><div class="mpts">+350</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,400)"><div class="mico">📰</div><div class="mbody"><div class="mname">Comunicado no condomínio</div><div class="mdesc">Publicou sobre Gabriel no mural ou WhatsApp</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+400</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,500)"><div class="mico">📋</div><div class="mbody"><div class="mname">Pauta na assembleia</div><div class="mdesc">Incluiu resultados Gabriel na ata ou apresentação</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+500</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+    </div>
+
+    <div class="mcat">
+      <div class="slbl">Prospecção e conexão</div>
+      <div class="mc" onclick="toggleM(this,600)"><div class="mico">🤝</div><div class="mbody"><div class="mname">Trouxe síndico ao stand</div><div class="mdesc">Levou síndico não-cliente a um estande Gabriel</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+600</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,500)"><div class="mico">🏘️</div><div class="mbody"><div class="mname">Reunião de vizinhança</div><div class="mdesc">Convidou dois síndicos vizinhos para reunião</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+500</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,700)"><div class="mico">🚗</div><div class="mbody"><div class="mname">Visita técnica (VT)</div><div class="mdesc">Levou síndico vizinho em VT Gabriel</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+700</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,450)"><div class="mico">☕</div><div class="mbody"><div class="mname">Café com síndico não-cliente</div><div class="mdesc">Encontro informal para apresentar a Gabriel</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+450</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,800)"><div class="mico">🏢</div><div class="mbody"><div class="mname">Apresentou Gabriel na reunião</div><div class="mdesc">Apresentação formal para moradores ou conselho</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+800</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+    </div>
+
+    <div class="mcat">
+      <div class="slbl">Engajamento</div>
+      <div class="mc" onclick="toggleM(this,300)"><div class="mico">⭐</div><div class="mbody"><div class="mname">Avaliação 5 estrelas no Google</div><div class="mdesc">Deixou avaliação pública no Google Maps</div><span class="mreg"><i class="ti ti-check" style="font-size:9px"></i> validação automática</span></div><div class="mright"><div class="mpts">+300</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,400)"><div class="mico">💬</div><div class="mbody"><div class="mname">Depoimento escrito</div><div class="mdesc">Enviou depoimento para materiais comerciais</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+400</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,600)"><div class="mico">🎤</div><div class="mbody"><div class="mname">Depoimento em vídeo</div><div class="mdesc">Gravou vídeo de benefícios para uso oficial</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+600</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,350)"><div class="mico">🎓</div><div class="mbody"><div class="mname">Participou do Fórum + trouxe alguém</div><div class="mdesc">Compareceu ao evento trimestral com outro síndico</div><span class="mreg"><i class="ti ti-brand-whatsapp" style="font-size:9px"></i> WhatsApp ou app</span></div><div class="mright"><div class="mpts">+350</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+    </div>
+
+    <div class="mcat">
+      <div class="slbl">Alto impacto — desbloqueiam prêmios premium</div>
+      <div class="mc" onclick="toggleM(this,1200)"><div class="mico">📲</div><div class="mbody"><div class="mname">Case de segurança registrado</div><div class="mdesc">Câmera Gabriel ajudou a resolver ocorrência</div><span class="ai-badge ai-alto"><i class="ti ti-bolt" style="font-size:9px"></i> Alto Impacto</span></div><div class="mright"><div class="mpts">+1.200</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,2000)"><div class="mico">🏆</div><div class="mbody"><div class="mname">Indicação convertida</div><div class="mdesc">Indicou síndico que assinou contrato com a Gabriel</div><span class="ai-badge ai-alto"><i class="ti ti-bolt" style="font-size:9px"></i> Alto Impacto</span></div><div class="mright"><div class="mpts">+2.000</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+      <div class="mc" onclick="toggleM(this,1500)"><div class="mico">🔄</div><div class="mbody"><div class="mname">Upgrade de contrato</div><div class="mdesc">Expandiu câmeras ou serviços no próprio condomínio</div><span class="ai-badge ai-alto"><i class="ti ti-bolt" style="font-size:9px"></i> Alto Impacto</span></div><div class="mright"><div class="mpts">+1.500</div><div class="mptsl">pts</div></div><div class="mchk"></div></div>
+    </div>
+  </div>
+
+  <!-- PRÊMIOS -->
+  <div id="tab-premios" class="sec">
+    <div class="pcat-intro"><div class="pcat-intro-t">Catálogo de experiências</div><div class="pcat-intro-s">Resgate o que quiser — seus pontos, suas escolhas</div></div>
+    <div class="saldo-grid">
+      <div class="sc hl"><div class="sc-lbl">Pontos disponíveis</div><div class="sc-val" id="saldo-pts">300 pts</div></div>
+      <div class="sc"><div class="sc-lbl">Já resgatado</div><div class="sc-val" id="saldo-used">0 pts</div></div>
+    </div>
+    <div class="flav-leg">
+      <div class="fl-it"><div class="fl-dot" style="background:#f97316"></div>Adrenalina</div>
+      <div class="fl-it"><div class="fl-dot" style="background:#60a5fa"></div>Sofisticação</div>
+      <div class="fl-it"><div class="fl-dot" style="background:#34d399"></div>Descoberta</div>
+      <div class="fl-it"><div class="fl-dot" style="background:#a78bfa"></div>Exp. Gabriel</div>
+    </div>
+
+    <div class="slbl">Descoberta carioca</div>
+    <div class="exp-card" id="ep-samba"><div class="exp-top"><span class="exp-emoji">🎶</span><div class="exp-body"><div class="exp-name">Noite de samba na Pedra do Sal</div><div class="exp-desc">Roda ao ar livre na Pequena África, com guia privativo</div><div class="exp-tags"><span class="etag ed">Descoberta</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">400 pts</div></div><button class="exp-btn" onclick="resgatar('ep-samba',400)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-fiscal"><div class="exp-top"><span class="exp-emoji">🚢</span><div class="exp-body"><div class="exp-name">Tour náutico — Ilha Fiscal</div><div class="exp-desc">Barco privativo, Baía de Guanabara e o Rio visto pelo mar</div><div class="exp-tags"><span class="etag ed">Descoberta</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">700 pts</div></div><button class="exp-btn" onclick="resgatar('ep-fiscal',700)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-bondinho"><div class="exp-top"><span class="exp-emoji">🌅</span><div class="exp-body"><div class="exp-name">Café no Bondinho ao nascer do sol</div><div class="exp-desc">Acesso privativo antes da abertura — vista 360° ao amanhecer</div><div class="exp-tags"><span class="etag es">Sofisticação</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">800 pts</div></div><button class="exp-btn" onclick="resgatar('ep-bondinho',800)">Resgatar</button></div></div>
+
+    <div class="slbl" style="margin-top:1rem">Adrenalina</div>
+    <div class="exp-card" id="ep-parapente"><div class="exp-top"><span class="exp-emoji">🪂</span><div class="exp-body"><div class="exp-name">Parapente biplace — Pedra Bonita</div><div class="exp-desc">Decolagem a 520m, Floresta da Tijuca e orla sob seus pés</div><div class="exp-tags"><span class="etag ea">Adrenalina</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">900 pts</div></div><button class="exp-btn" onclick="resgatar('ep-parapente',900)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-escalada"><div class="exp-top"><span class="exp-emoji">🗻</span><div class="exp-body"><div class="exp-name">Escalada + rapel no Pão de Açúcar</div><div class="exp-desc">O lado que nenhum carioca conhece — guia certificado</div><div class="exp-tags"><span class="etag ea">Adrenalina</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">1.000 pts</div></div><button class="exp-btn" onclick="resgatar('ep-escalada',1000)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-helico"><div class="exp-top"><span class="exp-emoji">🚁</span><div class="exp-body"><div class="exp-name">Helicóptero sem porta ao pôr do sol</div><div class="exp-desc">Doors-off 30min sobrevoando Cristo, Pão de Açúcar e orla</div><div class="exp-tags"><span class="etag ea">Adrenalina</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">1.400 pts</div></div><button class="exp-btn" onclick="resgatar('ep-helico',1400)">Resgatar</button></div></div>
+
+    <div class="slbl" style="margin-top:1rem">Sofisticação</div>
+    <div class="exp-card" id="ep-opera"><div class="exp-top"><span class="exp-emoji">🎭</span><div class="exp-body"><div class="exp-name">Jantar + Ópera — Theatro Municipal</div><div class="exp-desc">Alto padrão cultural no cartão-postal histórico do Rio</div><div class="exp-tags"><span class="etag es">Sofisticação</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">1.200 pts</div></div><button class="exp-btn" onclick="resgatar('ep-opera',1200)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-cordon"><div class="exp-top"><span class="exp-emoji">👨‍🍳</span><div class="exp-body"><div class="exp-name">Aula no Le Cordon Bleu Rio</div><div class="exp-desc">Técnicas de cuisine com chef profissional</div><div class="exp-tags"><span class="etag es">Sofisticação</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">1.500 pts</div></div><button class="exp-btn" onclick="resgatar('ep-cordon',1500)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-oro"><div class="exp-top"><span class="exp-emoji">⭐</span><div class="exp-body"><div class="exp-name">Jantar no Oro — 2 estrelas Michelin</div><div class="exp-desc">Menu degustação Chef Felipe Bronze, Leblon</div><div class="exp-tags"><span class="etag es">Sofisticação</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">1.800 pts</div></div><button class="exp-btn" onclick="resgatar('ep-oro',1800)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-iate"><div class="exp-top"><span class="exp-emoji">⛵</span><div class="exp-body"><div class="exp-name">Iate privativo — Ilhas Cagarras</div><div class="exp-desc">Jantar a bordo, águas cristalinas e open bar</div><div class="exp-tags"><span class="etag es">Sofisticação</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">2.000 pts</div></div><button class="exp-btn" onclick="resgatar('ep-iate',2000)">Resgatar</button></div></div>
+
+    <div class="slbl" style="margin-top:1rem">Experiência Gabriel — exclusivo embaixadores</div>
+    <div class="exp-card" id="ep-consultoria"><div class="exp-top"><span class="exp-emoji">🏗️</span><div class="exp-body"><div class="exp-name">Consultoria em gestão de condomínio</div><div class="exp-desc">Sessão individual com especialista parceiro Gabriel</div><div class="exp-tags"><span class="etag eg">Exp. Gabriel</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">1.000 pts</div></div><button class="exp-btn" onclick="resgatar('ep-consultoria',1000)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-ceo"><div class="exp-top"><span class="exp-emoji">👑</span><div class="exp-body"><div class="exp-name">Jantar exclusivo com CEO Erick Coser</div><div class="exp-desc">O prêmio que nenhum concorrente consegue replicar</div><div class="exp-tags"><span class="etag eg">Exp. Gabriel</span></div></div></div><div class="exp-bottom"><div><div class="exp-cost">3.000 pts</div></div><button class="exp-btn" onclick="resgatar('ep-ceo',3000)">Resgatar</button></div></div>
+    <div class="exp-card" id="ep-sp"><div class="exp-top"><span class="exp-emoji">✈️</span><div class="exp-body"><div class="exp-name">Final de semana duplo em São Paulo</div><div class="exp-desc">Voo + 2 noites Rosewood SP (Philippe Starck) + Jantar Taraz (Chef Felipe Bronze) + Tour HQ Gabriel</div><div class="exp-tags"><span class="etag eg">Exp. Gabriel</span><span class="etag es">Sofisticação</span></div><div class="exp-note">Requer ao menos 1 indicação convertida</div></div></div><div class="exp-bottom"><div><div class="exp-cost">4.000 pts</div></div><button class="exp-btn" onclick="resgatar('ep-sp',4000)">Resgatar</button></div></div>
+  </div>
+
+  <!-- REGISTRO -->
+  <div id="tab-registro" class="sec">
+    <div class="reg-intro"><div class="reg-intro-t">Como registrar uma missão</div><div class="reg-intro-s">Dois canais. Um painel. Aprovação em 48h úteis.</div></div>
+
+    <div class="ch-grid">
+      <div class="ch-card">
+        <div class="ch-head"><div class="ch-icon" style="background:rgba(37.211,102,.15)"><i class="ti ti-brand-whatsapp" style="font-size:16px;color:#25D366"></i></div><div><div class="ch-name">WhatsApp</div><div class="ch-sub">Canal preferido</div></div></div>
+        <div class="ch-steps">
+          <div class="ch-step"><div class="ch-num" style="background:rgba(37.211,102,.15);color:#4ade80">1</div>Foto ou vídeo</div>
+          <div class="ch-step"><div class="ch-num" style="background:rgba(37.211,102,.15);color:#4ade80">2</div>Bot classifica</div>
+          <div class="ch-step"><div class="ch-num" style="background:rgba(37.211,102,.15);color:#4ade80">3</div>Aprovação 48h</div>
+        </div>
+      </div>
+      <div class="ch-card">
+        <div class="ch-head"><div class="ch-icon" style="background:var(--gm)"><i class="ti ti-device-mobile" style="font-size:16px;color:var(--gg)"></i></div><div><div class="ch-name">App</div><div class="ch-sub">Status em tempo real</div></div></div>
+        <div class="ch-steps">
+          <div class="ch-step"><div class="ch-num" style="background:var(--gm);color:var(--gg)">1</div>Abra a missão</div>
+          <div class="ch-step"><div class="ch-num" style="background:var(--gm);color:var(--gg)">2</div>Upload da prova</div>
+          <div class="ch-step"><div class="ch-num" style="background:var(--gm);color:var(--gg)">3</div>Acompanhe ao vivo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slbl" style="margin-bottom:10px">Conversa real — WhatsApp</div>
+    <div class="phone-wrap">
+      <div class="phone"><div class="phone-screen">
+        <div class="phone-topbar"><div class="phone-av">G</div><div><div class="phone-cn">Gabriel Embaixadores</div><div class="phone-cs">Online</div></div></div>
+        <div class="chat-area">
+          <div class="msg msg-sys">Hoje</div>
+          <div class="msg msg-out">Quero registrar uma missão 🙋<div class="msg-t">14:02</div></div>
+          <div class="msg msg-bot"><div class="bot-hdr"><div class="bot-dot"></div><span class="bot-lbl">Gabriel Bot</span></div>Oi! Qual categoria?<br>1 - Presença<br>2 - Prospecção<br>3 - Engajamento<br>4 - Alto Impacto<div class="msg-t">14:02</div></div>
+          <div class="msg msg-out">2 — fiz VT com síndico vizinho<div class="msg-t">14:03</div></div>
+          <div class="msg msg-bot"><div class="bot-hdr"><div class="bot-dot"></div><span class="bot-lbl">Gabriel Bot</span></div>Manda foto ou vídeo comprovando!<div class="msg-t">14:04</div></div>
+          <div class="msg msg-out">📷 [foto com síndico no local]<div class="msg-t">14:05</div></div>
+          <div class="msg msg-bot"><div class="bot-hdr"><div class="bot-dot"></div><span class="bot-lbl">Gabriel Bot</span></div>Recebido! Em análise.<br><span class="pts-chip pts-pend">+700 pts pendentes</span><div class="msg-t">14:05</div></div>
+          <div class="msg msg-sys">2h depois</div>
+          <div class="msg msg-bot"><div class="bot-hdr"><div class="bot-dot"></div><span class="bot-lbl">Gabriel Bot</span></div>Missão aprovada! ✅<br><span class="pts-chip pts-ok">+700 pts creditados</span><br>Saldo: 2.350 pts · Pos.: 2°<div class="msg-t">16:12</div></div>
+        </div>
+        <div class="chat-bar"><div class="chat-input-mock">Mensagem</div><div class="chat-send"><i class="ti ti-send" style="font-size:11px;color:#fff"></i></div></div>
+      </div></div>
+    </div>
+
+    <div class="slbl" style="margin-bottom:10px">Painel do coordenador</div>
+    <div class="admin-wrap">
+      <div class="admin-title">Fila de aprovação<span class="admin-badge">3 pendentes</span></div>
+      <div class="qi" id="qi1"><div class="qi-av">RC</div><div class="qi-info"><div class="qi-name">Roberto Carvalho</div><div class="qi-mission">Visita técnica — Ed. Marina Barra</div><div class="qi-meta"><span class="qi-pts">+700 pts</span><span class="qi-ch qi-wa">WhatsApp</span><span class="qi-time">Há 2h</span></div></div><div class="qi-btns"><button class="btn-ap" onclick="aprovar('qi1')">Aprovar</button><button class="btn-rj" onclick="rejeitar('qi1')">Rejeitar</button></div></div>
+      <div class="qi" id="qi2"><div class="qi-av">MB</div><div class="qi-info"><div class="qi-name">Marcos Barreto</div><div class="qi-mission">Apresentou Gabriel na reunião de moradores</div><div class="qi-meta"><span class="qi-pts">+800 pts</span><span class="qi-ch qi-app">App</span><span class="qi-time">Há 5h</span></div></div><div class="qi-btns"><button class="btn-ap" onclick="aprovar('qi2')">Aprovar</button><button class="btn-rj" onclick="rejeitar('qi2')">Rejeitar</button></div></div>
+      <div class="qi" id="qi3"><div class="qi-av">AP</div><div class="qi-info"><div class="qi-name">Ana Paula</div><div class="qi-mission">Case de segurança — câmera identificou suspeito</div><div class="qi-meta"><span class="qi-pts">+1.200 pts</span><span class="qi-ch qi-wa">WhatsApp</span><span class="qi-time">Há 1h</span></div></div><div class="qi-btns"><button class="btn-ap" onclick="aprovar('qi3')">Aprovar</button><button class="btn-rj" onclick="rejeitar('qi3')">Rejeitar</button></div></div>
+    </div>
+    <div class="rnote"><i class="ti ti-check" style="font-size:15px;flex-shrink:0;color:var(--gg)"></i><span>Posts com @gabriel ou #EmbaixadorGabriel são validados automaticamente — sem ação do coordenador.</span></div>
+  </div>
+
+  <!-- EVENTOS -->
+  <div id="tab-eventos" class="sec">
+    <div class="evlaunch"><div class="evdate">29 DE JUNHO · JANTAR DE LANÇAMENTO</div><div class="evtitle">Noite dos Embaixadores</div><div class="evdesc">Lançamento oficial com os 5 síndicos parceiros. App ao vivo, catálogo, missões e cerimônia dos primeiros badges.</div></div>
+    <div class="slbl" style="margin-bottom:9px">Fórum Trimestral Gabriel</div>
+    <div class="qgrid">
+      <div class="qc"><div class="qdate">SET · 2026</div><div class="qname">Summit Segurança & Tech</div><div class="qtheme">IA em segurança predial, LGPD e dados para síndicos</div><span class="qtag">Tecnologia</span></div>
+      <div class="qc"><div class="qdate">DEZ · 2026</div><div class="qname">Summit Gestão & Pessoas</div><div class="qtheme">Liderança, conflitos e comunicação não-violenta</div><span class="qtag">Desenvolvimento</span></div>
+      <div class="qc"><div class="qdate">MAR · 2027</div><div class="qname">Summit Vendas & Persuasão</div><div class="qtheme">Negociação, SPIN e apresentações para assembleia</div><span class="qtag">Vendas</span></div>
+      <div class="qc"><div class="qdate">JUN · 2027</div><div class="qname">Summit Auditoria & Finanças</div><div class="qtheme">Prestação de contas e auditoria de fornecedores</div><span class="qtag">Finanças</span></div>
+    </div>
+    <div class="regnote">Ao menos <strong>1 missão</strong> no trimestre garante acesso ao Fórum. O tour no HQ em SP é agendado nos fins de semana dos Summits.</div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+var pts=300,usedPts=0;
+
+function upd(){
+  var pct=Math.min(Math.round((pts/5000)*100),100);
+  document.getElementById('hdr-bar').style.width=pct+'%';
+  var f=pts.toLocaleString('pt-BR');
+  document.getElementById('hdr-pts').textContent=f+' pts';
+  document.getElementById('nav-pts').textContent=f+' pts';
+  document.getElementById('pts-display').textContent=f+' pts';
+  document.getElementById('saldo-pts').textContent=f+' pts';
+  document.getElementById('saldo-used').textContent=usedPts.toLocaleString('pt-BR')+' pts';
+  document.querySelectorAll('.exp-btn:not(.done-btn)').forEach(function(b){
+    var c=parseInt(b.closest('.exp-card').dataset.cost||0);
+    b.disabled=pts<c;
+  });
+}
+
+function showTab(id,btn){
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('active')});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleM(card,val){
+  var was=card.classList.contains('done');
+  card.classList.toggle('done');
+  var chk=card.querySelector('.mchk');
+  if(!was){
+    pts+=val;
+    chk.innerHTML='<i class="ti ti-check" style="font-size:10px"></i>';
+    chk.style.background='#0AFC33';chk.style.borderColor='#0AFC33';chk.style.color='#000';
+  } else {
+    pts-=val;chk.innerHTML='';chk.style.background='';chk.style.borderColor='';
+  }
+  upd();
+}
+
+function resgatar(id,cost){
+  if(pts<cost)return;
+  var card=document.getElementById(id),btn=card.querySelector('.exp-btn');
+  if(btn.classList.contains('done-btn'))return;
+  pts-=cost;usedPts+=cost;
+  card.classList.add('resgated');
+  btn.textContent='Resgatado ✓';btn.classList.add('done-btn');btn.disabled=false;card.dataset.cost=0;
+  upd();
+}
+
+function aprovar(id){
+  var item=document.getElementById(id);
+  item.querySelector('.qi-btns').innerHTML='<span class="apvd"><i class="ti ti-check" style="font-size:11px;margin-right:3px"></i>Aprovado</span>';
+  item.style.opacity='.55';
+}
+function rejeitar(id){
+  var item=document.getElementById(id);
+  item.style.opacity='.3';
+  item.querySelector('.qi-btns').innerHTML='<span style="font-size:10px;color:#666">Rejeitado</span>';
+}
+
+// init cost data attrs
+document.querySelectorAll('.exp-card').forEach(function(card){
+  var btn=card.querySelector('.exp-btn');
+  if(!btn)return;
+  var m=btn.getAttribute('onclick').match(/\d+\)$/);
+  if(m)card.dataset.cost=m[0].replace(')','');
+});
+upd();
+</script>
+</body>
+</html>
